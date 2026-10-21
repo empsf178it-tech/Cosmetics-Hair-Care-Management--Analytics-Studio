@@ -1225,12 +1225,12 @@ function getSubscriptionPageHTML() {
           </p>
 
           <!-- Frequency Toggle -->
-          <div style="display: inline-flex; align-items: center; background: #fff; padding: 0.4rem; border-radius: var(--radius-full); border: 1px solid var(--border-light); margin-top: 2rem; box-shadow: var(--shadow-sm);">
-            <button onclick="setSubscriptionCycle('monthly')" style="padding: 0.6rem 1.6rem; border-radius: var(--radius-full); font-weight: 600; font-size: 0.9rem; transition: all 0.2s; background: ${subscriptionBillingCycle === 'monthly' ? 'var(--forest-green)' : 'transparent'}; color: ${subscriptionBillingCycle === 'monthly' ? '#fff' : 'var(--charcoal)'};">
+          <div class="subscription-cycle-toggle" style="display: inline-flex; align-items: center; background: #fff; padding: 0.35rem; border-radius: var(--radius-full); border: 1px solid var(--border-light); margin-top: 1.75rem; box-shadow: var(--shadow-sm); max-width: 100%;">
+            <button onclick="setSubscriptionCycle('monthly')" style="padding: 0.6rem clamp(0.75rem, 3vw, 1.6rem); border-radius: var(--radius-full); font-weight: 600; font-size: clamp(0.78rem, 2.4vw, 0.9rem); transition: all 0.2s; border: none; cursor: pointer; background: ${subscriptionBillingCycle === 'monthly' ? 'var(--forest-green)' : 'transparent'}; color: ${subscriptionBillingCycle === 'monthly' ? '#fff' : 'var(--charcoal)'};">
               Monthly Delivery
             </button>
-            <button onclick="setSubscriptionCycle('quarterly')" style="padding: 0.6rem 1.6rem; border-radius: var(--radius-full); font-weight: 600; font-size: 0.9rem; transition: all 0.2s; background: ${subscriptionBillingCycle === 'quarterly' ? 'var(--forest-green)' : 'transparent'}; color: ${subscriptionBillingCycle === 'quarterly' ? '#fff' : 'var(--charcoal)'};">
-              Quarterly Box (Save Extra 10%)
+            <button onclick="setSubscriptionCycle('quarterly')" style="padding: 0.6rem clamp(0.75rem, 3vw, 1.6rem); border-radius: var(--radius-full); font-weight: 600; font-size: clamp(0.78rem, 2.4vw, 0.9rem); transition: all 0.2s; border: none; cursor: pointer; background: ${subscriptionBillingCycle === 'quarterly' ? 'var(--forest-green)' : 'transparent'}; color: ${subscriptionBillingCycle === 'quarterly' ? '#fff' : 'var(--charcoal)'};">
+              Quarterly Box (Save 10%)
             </button>
           </div>
         </div>
@@ -1379,57 +1379,65 @@ function getSubscriptionPageHTML() {
         </div>
 
         <!-- NEW SECTION 2: What's Inside The Unboxing Box & Subscriber Perks Grid -->
-        <div style="background: linear-gradient(135deg, var(--forest-green), #183a2b); border-radius: var(--radius-lg); padding: clamp(2.5rem, 5vw, 4.5rem); color: #fff; margin-bottom: 5.5rem; box-shadow: var(--shadow-lg); position: relative; overflow: hidden;">
+        <div class="unboxing-experience-card">
           
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 3.5rem; align-items: center;">
+          <div class="unboxing-grid">
             
             <!-- Left Info -->
-            <div>
-              <span class="badge badge-gold" style="margin-bottom: 1rem;">The HairBloom Unboxing Experience</span>
-              <h2 style="color: #fff; font-size: clamp(2.2rem, 3.8vw, 3.2rem); margin-bottom: 1.25rem; line-height: 1.2;">
-                More Than Just Haircare.<br><span style="font-style: italic; color: var(--muted-gold-light);">A Luxurious Self-Care Ritual.</span>
+            <div class="unboxing-content">
+              <span class="badge badge-gold unboxing-badge">The HairBloom Unboxing Experience</span>
+              <h2 class="unboxing-title">
+                More Than Just Haircare.<br><span class="unboxing-title-italic">A Luxurious Self-Care Ritual.</span>
               </h2>
-              <p style="color: rgba(255,255,255,0.85); font-size: 1rem; line-height: 1.7; margin-bottom: 2rem;">
+              <p class="unboxing-desc">
                 Every seasonal subscriber delivery arrives thoughtfully wrapped in recyclable botanical tissue, complete with full-size formulations, travel minis, and seasonal scalp tools.
               </p>
 
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; margin-bottom: 2.25rem;">
-                <div style="background: rgba(255,255,255,0.08); padding: 1.1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15);">
-                  <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">🎁</div>
-                  <div style="font-weight: 600; font-size: 0.92rem; color: #fff; margin-bottom: 0.2rem;">Free Welcome Gift</div>
-                  <div style="font-size: 0.78rem; color: rgba(255,255,255,0.7);">Bian Stone scalp comb included in box 1 ($28 value).</div>
+              <div class="unboxing-perks-grid">
+                <div class="unboxing-perk-card">
+                  <div class="unboxing-perk-icon">🎁</div>
+                  <div class="unboxing-perk-info">
+                    <div class="unboxing-perk-title">Free Welcome Gift</div>
+                    <div class="unboxing-perk-sub">Bian Stone scalp comb included in box 1 ($28 value).</div>
+                  </div>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.08); padding: 1.1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15);">
-                  <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">🚚</div>
-                  <div style="font-weight: 600; font-size: 0.92rem; color: #fff; margin-bottom: 0.2rem;">Free Priority Shipping</div>
-                  <div style="font-size: 0.78rem; color: rgba(255,255,255,0.7);">Complimentary nationwide delivery on every subscription.</div>
+                <div class="unboxing-perk-card">
+                  <div class="unboxing-perk-icon">🚚</div>
+                  <div class="unboxing-perk-info">
+                    <div class="unboxing-perk-title">Free Priority Shipping</div>
+                    <div class="unboxing-perk-sub">Complimentary nationwide delivery on every subscription.</div>
+                  </div>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.08); padding: 1.1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15);">
-                  <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">✨</div>
-                  <div style="font-weight: 600; font-size: 0.92rem; color: #fff; margin-bottom: 0.2rem;">Seasonal Sample Sachets</div>
-                  <div style="font-size: 0.78rem; color: rgba(255,255,255,0.7);">Preview upcoming lab-exclusive hair masks & serums.</div>
+                <div class="unboxing-perk-card">
+                  <div class="unboxing-perk-icon">✨</div>
+                  <div class="unboxing-perk-info">
+                    <div class="unboxing-perk-title">Seasonal Sample Sachets</div>
+                    <div class="unboxing-perk-sub">Preview upcoming lab-exclusive hair masks & serums.</div>
+                  </div>
                 </div>
 
-                <div style="background: rgba(255,255,255,0.08); padding: 1.1rem; border-radius: var(--radius-sm); border: 1px solid rgba(255,255,255,0.15);">
-                  <div style="font-size: 1.25rem; margin-bottom: 0.35rem;">🛡️</div>
-                  <div style="font-weight: 600; font-size: 0.92rem; color: #fff; margin-bottom: 0.2rem;">30-Day Guarantee</div>
-                  <div style="font-size: 0.78rem; color: rgba(255,255,255,0.7);">Love your results or receive a full routine reformulation.</div>
+                <div class="unboxing-perk-card">
+                  <div class="unboxing-perk-icon">🛡️</div>
+                  <div class="unboxing-perk-info">
+                    <div class="unboxing-perk-title">30-Day Guarantee</div>
+                    <div class="unboxing-perk-sub">Love your results or receive a full routine reformulation.</div>
+                  </div>
                 </div>
               </div>
 
-              <button class="btn btn-gold" onclick="window.scrollTo({ top: 380, behavior: 'smooth' })">
+              <button class="btn btn-gold unboxing-cta-btn" onclick="window.scrollTo({ top: 380, behavior: 'smooth' })">
                 Choose Your Plan Above ↑
               </button>
             </div>
 
             <!-- Right Visual Showcase -->
-            <div style="position: relative; text-align: center;">
-              <div style="position: relative; display: inline-block; width: 100%; max-width: 440px;">
-                <img src="assets/images/17.jpg" alt="HairBloom Unboxing Experience" style="width: 100%; height: 420px; object-fit: cover; border-radius: var(--radius-md); box-shadow: 0 20px 45px rgba(0,0,0,0.3); border: 2px solid rgba(255,255,255,0.2);">
+            <div class="unboxing-visual">
+              <div class="unboxing-img-wrapper">
+                <img src="assets/images/17.jpg" alt="HairBloom Unboxing Experience" class="unboxing-img">
                 
-                <div style="position: absolute; bottom: 1.5rem; left: 1.5rem; right: 1.5rem; background: rgba(25, 54, 41, 0.92); backdrop-filter: blur(10px); padding: 0.85rem 1.25rem; border-radius: var(--radius-sm); border: 1px solid rgba(169, 189, 167, 0.3); text-align: left; font-size: 0.82rem; color: #fff;">
+                <div class="unboxing-milestone-badge">
                   <strong style="color: var(--muted-gold-light);">Subscriber Milestone:</strong> Over 30,000 seasonal boxes delivered with a 98.4% satisfaction rate.
                 </div>
               </div>
@@ -1440,7 +1448,7 @@ function getSubscriptionPageHTML() {
         </div>
 
         <!-- Subscription Management Demo Controls -->
-        <div class="glass-panel" style="padding: 2.5rem; margin-bottom: 5rem;">
+        <div class="glass-panel subscription-control-panel" style="padding: clamp(1.25rem, 3.5vw, 2.5rem); margin-bottom: clamp(3rem, 5vw, 5rem);">
           <h3 style="font-size: 1.8rem; margin-bottom: 0.5rem;">Active Subscription Control Center</h3>
           <p style="margin-bottom: 2rem; font-size: 0.95rem;">HairBloom puts you in total command. Manage your upcoming shipment with one click.</p>
           

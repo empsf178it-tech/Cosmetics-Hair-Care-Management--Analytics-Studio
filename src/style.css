@@ -711,6 +711,45 @@ footer.site-footer {
   padding-left: 4px;
 }
 
+.footer-social-links {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin-top: 1.25rem;
+}
+
+.footer-social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.footer-social-btn:hover {
+  background: var(--muted-gold);
+  border-color: var(--muted-gold);
+  color: var(--forest-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.footer-social-btn svg {
+  display: block;
+  transition: transform var(--transition-fast);
+}
+
+.footer-social-btn:hover svg {
+  transform: scale(1.1);
+}
+
 .footer-bottom {
   padding-top: 2rem;
   border-top: 1px solid rgba(255, 255, 255, 0.1);
@@ -1236,6 +1275,137 @@ footer.site-footer {
   flex-direction: column;
 }
 
+/* Unboxing Experience Section Base */
+.unboxing-experience-card {
+  background: linear-gradient(135deg, var(--forest-green), #183a2b);
+  border-radius: var(--radius-lg);
+  padding: clamp(2.5rem, 5vw, 4.5rem);
+  color: #fff;
+  margin-bottom: 5.5rem;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.unboxing-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 3.5rem;
+  align-items: center;
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.unboxing-content {
+  box-sizing: border-box;
+  width: 100%;
+}
+
+.unboxing-badge {
+  margin-bottom: 1rem;
+  display: inline-block;
+}
+
+.unboxing-title {
+  color: #fff;
+  font-size: clamp(2rem, 3.5vw, 3.2rem);
+  margin-bottom: 1.25rem;
+  line-height: 1.2;
+}
+
+.unboxing-title-italic {
+  font-style: italic;
+  color: var(--muted-gold-light);
+}
+
+.unboxing-desc {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1rem;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.unboxing-perks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 2.25rem;
+  box-sizing: border-box;
+}
+
+.unboxing-perk-card {
+  background: rgba(255, 255, 255, 0.08);
+  padding: 1.1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-sizing: border-box;
+}
+
+.unboxing-perk-icon {
+  font-size: 1.25rem;
+  margin-bottom: 0.35rem;
+}
+
+.unboxing-perk-title {
+  font-weight: 600;
+  font-size: 0.92rem;
+  color: #fff;
+  margin-bottom: 0.2rem;
+}
+
+.unboxing-perk-sub {
+  font-size: 0.78rem;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
+}
+
+.unboxing-cta-btn {
+  font-weight: 600;
+}
+
+.unboxing-visual {
+  position: relative;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.unboxing-img-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  max-width: 440px;
+  box-sizing: border-box;
+}
+
+.unboxing-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  display: block;
+}
+
+.unboxing-milestone-badge {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 1.5rem;
+  right: 1.5rem;
+  background: rgba(25, 54, 41, 0.92);
+  backdrop-filter: blur(10px);
+  padding: 0.85rem 1.25rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(169, 189, 167, 0.3);
+  text-align: left;
+  font-size: 0.82rem;
+  color: #fff;
+  box-sizing: border-box;
+}
+
 /* TABLET MODE (641px - 1024px, e.g. iPad Mini 768px):
    Row 1 has 2 cards, Row 2 has the 3rd card centered, all 3 cards sharing the EXACT SAME WIDTH AND HEIGHT */
 @media (min-width: 641px) and (max-width: 1024px) {
@@ -1402,6 +1572,18 @@ footer.site-footer {
     flex-direction: column !important;
     box-sizing: border-box !important;
   }
+
+  .unboxing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2.75rem !important;
+  }
+  .unboxing-experience-card {
+    padding: 3rem 2.25rem !important;
+    margin-bottom: 4rem !important;
+  }
+  .unboxing-img {
+    height: 380px !important;
+  }
 }
 
 /* MOBILE MODE (<= 640px): 1 card per row, stacked and centered */
@@ -1471,6 +1653,96 @@ footer.site-footer {
     width: 100% !important;
     max-width: 440px !important;
     box-sizing: border-box !important;
+  }
+
+  /* Unboxing Experience Section Mobile Optimization */
+  .unboxing-experience-card {
+    padding: 1.75rem 1.15rem !important;
+    margin-bottom: 3rem !important;
+    border-radius: var(--radius-md) !important;
+  }
+
+  .unboxing-grid {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .unboxing-title {
+    font-size: 1.6rem !important;
+    line-height: 1.25 !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .unboxing-desc {
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .unboxing-perks-grid {
+    grid-template-columns: 1fr !important;
+    gap: 0.75rem !important;
+    margin-bottom: 1.75rem !important;
+  }
+
+  .unboxing-perk-card {
+    padding: 0.85rem 1rem !important;
+    display: flex !important;
+    flex-direction: row !important;
+    align-items: flex-start !important;
+    gap: 0.85rem !important;
+  }
+
+  .unboxing-perk-icon {
+    font-size: 1.35rem !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+    margin-top: 2px !important;
+  }
+
+  .unboxing-perk-info {
+    flex: 1 !important;
+  }
+
+  .unboxing-perk-title {
+    font-size: 0.9rem !important;
+    margin-bottom: 0.2rem !important;
+  }
+
+  .unboxing-perk-sub {
+    font-size: 0.8rem !important;
+    line-height: 1.4 !important;
+  }
+
+  .unboxing-cta-btn {
+    width: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    padding: 0.85rem 1rem !important;
+    font-size: 0.92rem !important;
+  }
+
+  .unboxing-visual {
+    width: 100% !important;
+  }
+
+  .unboxing-img-wrapper {
+    max-width: 100% !important;
+  }
+
+  .unboxing-img {
+    height: 230px !important;
+    border-radius: var(--radius-sm) !important;
+  }
+
+  .unboxing-milestone-badge {
+    bottom: 0.65rem !important;
+    left: 0.65rem !important;
+    right: 0.65rem !important;
+    padding: 0.6rem 0.75rem !important;
+    font-size: 0.75rem !important;
+    line-height: 1.35 !important;
   }
 }
 
