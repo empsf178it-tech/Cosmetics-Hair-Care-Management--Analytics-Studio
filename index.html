@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HairBloom — Hair Care Management & Analytics Studio</title>
+  <meta name="description" content="Discover your hair type, shop clinical botanical formulations, personalize routines, and track your hair health analytics with HairBloom.">
+  
+  <!-- Favicon -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌿</text></svg>">
+  
+  <!-- Google Fonts: Cormorant Garamond & Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- HairBloom Stylesheet -->
+  <link rel="stylesheet" href="src/style.css?v=6">
+
+  <!-- Three.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+</head>
+<body>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer"></div>
+
+  <!-- Persistent Navigation Header -->
+  <header class="site-header">
+    <div class="container">
+      <nav class="navbar">
+        
+        <!-- Brand Logo -->
+        <a href="javascript:void(0)" onclick="navigateTo('home')" class="brand-logo" id="brandLogo">
+          <div class="brand-logo-icon">🌿</div>
+          <span>HairBloom<span class="logo-dot">.</span></span>
+        </a>
+
+        <!-- Navigation Links & Drawer Container -->
+        <ul class="nav-links" id="navLinks">
+          <li><a href="javascript:void(0)" class="nav-link active" data-page="home" onclick="navigateTo('home'); document.getElementById('navLinks').classList.remove('mobile-open');">Home</a></li>
+          <li><a href="javascript:void(0)" class="nav-link" data-page="shop" onclick="navigateTo('shop'); document.getElementById('navLinks').classList.remove('mobile-open');">Shop Products</a></li>
+          <li><a href="javascript:void(0)" class="nav-link" data-page="quiz" onclick="navigateTo('quiz'); document.getElementById('navLinks').classList.remove('mobile-open');">Hair Quiz</a></li>
+          <li><a href="javascript:void(0)" class="nav-link" data-page="subscription" onclick="navigateTo('subscription'); document.getElementById('navLinks').classList.remove('mobile-open');">Subscriptions</a></li>
+          <li><a href="javascript:void(0)" class="nav-link" data-page="community" onclick="navigateTo('community'); document.getElementById('navLinks').classList.remove('mobile-open');">Community & About</a></li>
+          
+          <!-- Mobile-only Action Icons Row Inside Hamburger Menu -->
+          <li class="mobile-menu-actions">
+            <button class="mobile-drawer-btn" title="Search Store" onclick="navigateTo('shop'); document.getElementById('navLinks').classList.remove('mobile-open');">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </button>
+            <button class="mobile-drawer-btn" title="My Account" onclick="navigateTo('dashboard'); document.getElementById('navLinks').classList.remove('mobile-open');">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+            </button>
+            <button class="mobile-drawer-btn mobile-drawer-cart-btn" title="Botanical Bag" onclick="toggleCartDrawer(true); document.getElementById('navLinks').classList.remove('mobile-open');">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+              <span class="cart-counter mobile-cart-counter" id="mobileDrawerCartCount" style="display: none;">0</span>
+            </button>
+          </li>
+        </ul>
+
+        <!-- Desktop Navigation Action Icons -->
+        <div class="nav-actions">
+          
+          <!-- Search Icon Action (Desktop) -->
+          <button class="action-btn desktop-only-action" title="Search Catalogue" onclick="navigateTo('shop')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+          </button>
+
+          <!-- Account / Dashboard Icon (Desktop) -->
+          <button class="action-btn desktop-only-action" title="My Account" onclick="navigateTo('dashboard')">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/></svg>
+          </button>
+
+          <!-- Cart Drawer Button (Desktop) -->
+          <button class="action-btn desktop-only-action" title="Shopping Cart" onclick="toggleCartDrawer(true)" id="headerCartBtn">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+            <span class="cart-counter" id="headerCartCount" style="display: none;">0</span>
+          </button>
+
+          <!-- Mobile Toggle Menu Button -->
+          <button class="mobile-menu-btn" title="Toggle Navigation Menu" onclick="document.getElementById('navLinks').classList.toggle('mobile-open')">
+            <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+          </button>
+
+        </div>
+
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main View Container -->
+  <main id="mainContent">
+    <!-- Dynamic page content renders here -->
+  </main>
+
+  <!-- Shopping Cart Slide-out Drawer -->
+  <div class="cart-drawer-overlay" id="cartDrawerOverlay" onclick="toggleCartDrawer(false)"></div>
+  <div class="cart-drawer" id="cartDrawer">
+    <div class="cart-drawer-header">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:1.3rem;">🌿</span>
+        <h3 style="font-size:1.4rem; font-family:'Cormorant Garamond', serif;">Your Botanical Bag</h3>
+      </div>
+      <button onclick="toggleCartDrawer(false)" style="font-size:1.4rem; color:var(--charcoal-light); padding:0.2rem 0.6rem;">✕</button>
+    </div>
+
+    <!-- Items list -->
+    <div class="cart-drawer-body" id="cartItemsList">
+      <!-- Injected by JavaScript -->
+    </div>
+
+    <!-- Subtotal & Checkout -->
+    <div class="cart-drawer-footer">
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.95rem;">
+        <span>Subtotal</span>
+        <span id="cartSubtotal" style="font-weight:600;">$0.00</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.85rem; color:var(--charcoal-light);">
+        <span>Estimated Shipping</span>
+        <span id="cartShipping">Calculated at checkout</span>
+      </div>
+      <div style="display:flex; justify-content:space-between; margin-bottom:1.25rem; font-size:1.2rem; font-weight:700; color:var(--forest-green); border-top:1px solid var(--border-light); padding-top:0.75rem;">
+        <span>Total</span>
+        <span id="cartTotal">$0.00</span>
+      </div>
+      <button class="btn btn-primary" style="width:100%;" onclick="showToast('Proceeding to secure checkout demo...'); toggleCartDrawer(false);">
+        Proceed to Checkout
+      </button>
+      <div style="text-align:center; margin-top:0.75rem; font-size:0.75rem; color:var(--charcoal-light);">
+        🔒 256-Bit Botanical SSL Encryption • Free 30-Day Happiness Guarantee
+      </div>
+    </div>
+  </div>
+
+  <!-- Quick View Product Modal -->
+  <div class="modal-overlay" id="quickViewModalOverlay" onclick="if(event.target === this) closeQuickView()">
+    <div class="modal-card">
+      <button class="modal-close-btn" onclick="closeQuickView()">✕</button>
+      <div id="quickViewContent">
+        <!-- Injected by JavaScript -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        
+        <div class="footer-col">
+          <div class="brand-logo" style="color: #fff; margin-bottom: 1rem;">
+            <div class="brand-logo-icon">🌿</div>
+            <span>HairBloom<span class="logo-dot">.</span></span>
+          </div>
+          <p>
+            Botanical scalp science engineered for individual hair textures. 100% sulfate-free, clinically tested, and sustainably packaged.
+          </p>
+          <div style="display:flex; gap:1rem; font-size:1.2rem;">
+            <a href="javascript:void(0)" onclick="showToast('Instagram: @HairBloomStudio')">📷</a>
+            <a href="javascript:void(0)" onclick="showToast('TikTok: @HairBloom')">🎵</a>
+            <a href="javascript:void(0)" onclick="showToast('Pinterest: HairBloom Hair Inspiration')">📌</a>
+            <a href="javascript:void(0)" onclick="showToast('YouTube: HairBloom Trichology Channel')">▶️</a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)" onclick="navigateTo('shop')">Shop Formulations</a></li>
+            <li><a href="javascript:void(0)" onclick="navigateTo('quiz')">Hair Type Quiz</a></li>
+            <li><a href="javascript:void(0)" onclick="navigateTo('subscription')">Subscription Plans</a></li>
+            <li><a href="javascript:void(0)" onclick="navigateTo('dashboard')">My Analytics Studio</a></li>
+            <li><a href="javascript:void(0)" onclick="navigateTo('community')">Community Stories</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Clean Values</h4>
+          <ul class="footer-links">
+            <li><a href="javascript:void(0)">100% Sulfate & Paraben Free</a></li>
+            <li><a href="javascript:void(0)">Cold-Pressed Botanicals</a></li>
+            <li><a href="javascript:void(0)">Biomimetic Silk Peptides</a></li>
+            <li><a href="javascript:void(0)">Post-Consumer Recycled Glass</a></li>
+            <li><a href="javascript:void(0)">Leaping Bunny Certified</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Studio Concierge</h4>
+          <p>Questions regarding formulation compatibility?</p>
+          <div style="font-size:0.9rem; color:rgba(255,255,255,0.85); line-height:1.7;">
+            concierge@hairbloomstudio.com<br>
+            +1 (800) 424-7256<br>
+            Monday – Friday, 9am – 6pm EST
+          </div>
+        </div>
+
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 HairBloom Botanical Laboratories. All rights reserved.</div>
+        <div style="display:flex; gap:1.5rem;">
+          <a href="javascript:void(0)" style="color:inherit;">Privacy Policy</a>
+          <a href="javascript:void(0)" style="color:inherit;">Terms of Service</a>
+          <a href="javascript:void(0)" style="color:inherit;">Ingredient Glossary</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Unique Botanical Circular Progress Back To Top -->
+  <button id="backToTopBtn" class="back-to-top-unique" title="Scroll back to top" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">
+    <svg class="progress-ring" width="56" height="56" viewBox="0 0 56 56">
+      <circle class="progress-ring-bg" stroke="rgba(197, 166, 106, 0.2)" stroke-width="3" fill="transparent" r="24" cx="28" cy="28"/>
+      <circle id="scrollProgressCircle" class="progress-ring-circle" stroke="var(--muted-gold)" stroke-width="3" stroke-linecap="round" fill="transparent" r="24" cx="28" cy="28"/>
+    </svg>
+    <div class="back-to-top-inner">
+      <span class="back-to-top-arrow">↑</span>
+      <span class="back-to-top-leaf">🌿</span>
+    </div>
+    <span id="scrollProgressPercent" class="back-to-top-tooltip">0%</span>
+  </button>
+
+  <!-- Application Scripts -->
+  <script src="src/data.js"></script>
+  <script src="src/three-scene.js"></script>
+  <script src="src/pages.js"></script>
+  <script src="src/app.js"></script>
+
+  <script>
+    // Initialize Application upon DOM load
+    document.addEventListener('DOMContentLoaded', () => {
+      loadSavedState();
+      updateCartBadge();
+
+      // Check URL hash first (e.g. #subscription, #shop, #quiz)
+      const hashPage = window.location.hash.replace('#', '').trim();
+      const savedPage = localStorage.getItem('hairbloom_active_page');
+
+      // Valid pages
+      const validPages = ['home', 'shop', 'quiz', 'dashboard', 'subscription', 'community'];
+      
+      let initialPage = 'home';
+      if (hashPage && validPages.includes(hashPage)) {
+        initialPage = hashPage;
+      } else if (savedPage && validPages.includes(savedPage)) {
+        initialPage = savedPage;
+      }
+
+      navigateTo(initialPage, null, false);
+
+      // Unique Back to top with Circular Scroll Progress
+      const backToTopBtn = document.getElementById('backToTopBtn');
+      const progressCircle = document.getElementById('scrollProgressCircle');
+      const progressPercent = document.getElementById('scrollProgressPercent');
+      const radius = 24;
+      const circumference = 2 * Math.PI * radius;
+
+      if (progressCircle) {
+        progressCircle.style.strokeDasharray = `${circumference} ${circumference}`;
+        progressCircle.style.strokeDashoffset = circumference;
+      }
+
+      function updateScrollProgress() {
+        const scrollTop = window.scrollY || document.documentElement.scrollTop;
+        const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+        const progress = scrollHeight > 0 ? (scrollTop / scrollHeight) : 0;
+        const offset = circumference - (progress * circumference);
+
+        if (progressCircle) {
+          progressCircle.style.strokeDashoffset = offset;
+        }
+
+        if (progressPercent) {
+          progressPercent.textContent = Math.round(progress * 100) + '%';
+        }
+
+        if (scrollTop > 300) {
+          backToTopBtn.classList.add('visible');
+        } else {
+          backToTopBtn.classList.remove('visible');
+        }
+      }
+
+      window.addEventListener('scroll', updateScrollProgress, { passive: true });
+      updateScrollProgress();
+    });
+  </script>
+</body>
+</html>
